@@ -12,7 +12,7 @@ RUN if [ -z "${UID}" ] ; then echo UID argument is NOT provided ; else usermod -
 # enable mod_rewrite for laravel routing to work (.htaccess)
 RUN a2enmod rewrite
 
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git zip unzip php-zip
 
 COPY . /var/www/html
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
