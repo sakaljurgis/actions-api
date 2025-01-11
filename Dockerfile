@@ -10,9 +10,14 @@ ARG UID
 RUN if [ -z "${UID}" ] ; then echo UID argument is NOT provided ; else usermod --non-unique --uid 1000 www-data ; fi
 
 # enable mod_rewrite for laravel routing to work (.htaccess)
-RUN a2enmod rewrite
 
-RUN apt-get update && apt-get install -y git zip unzip
+RUN a2enmod rewrite \
+    && apt-get update \
+    && apt-get install --assume-yes --no-install-recommends --quiet \
+      git zip unzip build-essential libmagickwand-dev \
+    && apt-get clean all \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick
 
 COPY . /var/www/html
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
