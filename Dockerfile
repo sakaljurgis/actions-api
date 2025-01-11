@@ -1,4 +1,4 @@
-FROM php:apache
+FROM php:8.1-apache
 
 # workaround for laravel public folder (entry file)
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
