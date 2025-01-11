@@ -22,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/generate-image', [GoogleImageGenerationController::class, 'generateImage']);
 Route::post('/generate-image', [GoogleImageGenerationController::class, 'generateImage']);
+
+Route::get('/phpinfo', function() {
+    return phpinfo();
+});
